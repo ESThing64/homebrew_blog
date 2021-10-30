@@ -28,6 +28,10 @@ User.init(
         isEmail: true,
       },
     },
+    // date: {
+    //   type: DataTypes.DATE,
+    //   defaultValue: date.now,
+    // },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
