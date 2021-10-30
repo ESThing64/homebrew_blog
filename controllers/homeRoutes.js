@@ -11,15 +11,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/login', async (req, res) => {
-  try {
-   
-    
-    res.render('login');
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
 
 router.get('/test', async (req, res) => {
