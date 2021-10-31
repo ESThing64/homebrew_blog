@@ -1,17 +1,20 @@
 [
     {
-      "name": "111111",
-      "post_body": "Blah blah blahblah blah blah"
+      "name": "erververevrvre",
+      "post_body": "Blah blah blahblah blah blah",
+      "user_id": 1
       
     },
     {
-      "name": "22222",
-      "post_body": "Blah blah blahblah blah blah"
+      "name": "sdfsdfsdfds",
+      "post_body": "Blah blsdvcah blah blah",
+      "user_id": 1
       
     },
     {
-      "name": "3333",
-      "post_body": "Blah blah blahblah blah blah"
+      "name": "wefsdfdssdf",
+      "post_body": "Blah blahsdfsdflah blah",
+      "user_id": 2
       
     }
   ]
