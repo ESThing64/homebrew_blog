@@ -1,6 +1,15 @@
 const router = require('express').Router();
 const User = require('../models/User')
 const bcrypt = require('bcrypt');
+const express = require('express');
+const app = express();
+let email = "john@gmail.com"
+
+
+
+
+
+
 
 router.get('/login', async (req, res) => {
   try {
@@ -12,10 +21,45 @@ router.get('/login', async (req, res) => {
   }
 });
 
+router.post('/login', async (req, res) => {
+  try {
+    const userData = await User.findOne({ where: {email: req.body.email } });
+
+    if (!userData) {
+      res.status(400)
+      res.json({message: "Your password or email is not correct."});
+      return;
+    }
+    const validatePassword = await userData.checkPassword(req.body.password);
+
+    if (!validatePassword) {
+      res.status(400)
+      res.json({message: "Your password or email is not correct."});
+      return;
+    }
+
+    req.session.save(() => {
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+
+      res.json({ user: userData, message: 'you did it!'});
+    });
+    
+    } catch (err){
+      res.status(400).json(err);
+    }
+});
+  
+ 
+
+
+
+
+
 router.get('/register', async (req, res) => {
   try {
 
-
+ 
     res.render('register');
   } catch (err) {
     res.status(500).json(err);
@@ -26,10 +70,10 @@ router.get('/register', async (req, res) => {
 
 router.post('/register', async  (req, res) => {
   try {
-    console.log(req.body)
-
-
+   
     const { name, email, password, password2 } = req.body
+    let test =  await User.findOne({ email: email });
+  console.log(test)
 
     let errors = [];
 
@@ -69,9 +113,9 @@ router.post('/register', async  (req, res) => {
        } else {
         
         const newUser = await  User.create({
-          name: "name",
-          email: "email@gmail.com",
-          password: "password"
+          name: name,
+          email: email,
+          password: password
            
         });
         
