@@ -1,10 +1,5 @@
 const router = require('express').Router();
 const User = require('../models/User')
-const bcrypt = require('bcrypt');
-const express = require('express');
-const app = express();
-let email = "john@gmail.com"
-
 
 
 
@@ -42,7 +37,10 @@ router.post('/login', async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
-      res.json({ user: userData, message: 'you did it!'});
+      
+      res.render('dashboard', {
+        loggedIn: req.session.loggedIn
+      })
     });
     
     } catch (err){
@@ -115,27 +113,23 @@ router.post('/register', async  (req, res) => {
         const newUser = await  User.create({
           name: name,
           email: email,
-          password: password
-           
+          password: password       
         });
-        
-  
          console.log(newUser)
-       }
-
-        
+       }    
       }
-
-
-     
-      
-
-
 
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/users/login');
+});
+
+
 
 
 module.exports = router;

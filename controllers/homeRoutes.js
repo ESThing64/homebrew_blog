@@ -1,7 +1,7 @@
 const router = require('express').Router();
+const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 
-
-router.get('/', async (req, res) => {
+router.get('/', forwardAuthenticated, async (req, res) => {
   try {
    
     
@@ -23,7 +23,7 @@ router.get('/test', async (req, res) => {
   }
 });
 
-router.get('/dashboard', async (req, res) => {
+router.get('/dashboard', ensureAuthenticated, async (req, res) => {
   try {
    
     
