@@ -2,7 +2,7 @@
 
 
 
-<div class="card">
+{{!-- <div class="card">
   <div class="card-header">
     Post title goes here. "Posted by ________ on CURRENT DATE"
   </div>
@@ -11,7 +11,17 @@
     <p class="card-text">post body is here</p>
    
   </div>
-</div>
+</div> --}}
+
+<article class="posts">
+ {{> posts-data post}}
+    {{#each posts as |post| }}
+        {{> posts-data post}}
+    {{/each}}
+
+</article>
+
+
 
 {{!-- {{#each posts as |post| }}
 
