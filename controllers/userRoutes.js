@@ -39,7 +39,8 @@ router.post('/login', async (req, res) => {
 
       
       res.render('dashboard', {
-        loggedIn: req.session.loggedIn
+        loggedIn: req.session.loggedIn,
+        loggedIn: req.body.loggedIn
       })
     });
     
