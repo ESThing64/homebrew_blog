@@ -4,23 +4,23 @@ const { Post, User, Comment } = require('../models');
 router.get('/', forwardAuthenticated, async (req, res) => {
   try {
     console.log('heyyy')
-    postData = await Post.findAll ({
+    postData = await Post.findAll({
       include: [
         {
-  
-            model: User,
-            attributes: ['name']
-        }
-    ]
-})
-  
-     const posts = postData.map(e => e.get({plain: true}));
-     console.log(posts)
 
-     res.render('homepage', {posts, loggedIn: req.session.loggedIn}) 
-   
-    
-    
+          model: User,
+          attributes: ['name']
+        }
+      ]
+    })
+
+    const posts = postData.map(e => e.get({ plain: true }));
+    // console.log(posts)
+
+    res.render('homepage', { posts, loggedIn: req.session.loggedIn })
+
+
+
   } catch (err) {
     res.status(500).json(err);
   }
@@ -30,19 +30,41 @@ router.get('/', forwardAuthenticated, async (req, res) => {
 
 router.get('/test', async (req, res) => {
   try {
-   
-    
-    res.render('newpost'); 
+
+
+    res.render('newpost');
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get('/dashboard', ensureAuthenticated, async (req, res) => {
+router.get('/dashboard', async (req, res) => {
   try {
+    console.log('+++++++++++++++++++heyyy++++++++++++++++++++++++++')
+    dashData = await Post.findAll({
+      where: { user_id: req.session.user_id},
+      attributes:['id','post_name','post_body','user_id'],
+
+      include: [{
+        model: Comment,
+        attributes: ['created_at', 'id', 'comment_body', 'post_id', 'user_id' ],
+        include: {
+            model: User,
+            attributes: ['name']
+        }
+    },
    
-    
-    res.render('dashboard'); 
+]
+
+
+      })
+
+    const posts = postData.map(e => e.get({ plain: true }));
+    console.log('heyy duuuuuude================================================')
+    console.log(posts)
+
+    res.render('dashboard', { posts, loggedIn: req.session.loggedIn })
+
   } catch (err) {
     res.status(500).json(err);
   }

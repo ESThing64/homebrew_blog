@@ -18,8 +18,10 @@ router.get('/login', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
+    console.log(req.body)
     const userData = await User.findOne({ where: {email: req.body.email } });
-
+console.log(userData)
+console.log("====9283748923498238942379180237891274908172304897123890471289034712890374890123749012837408912374089123749081273408912734908123789")
     if (!userData) {
       res.status(400)
       res.json({message: "Your password or email is not correct."});
@@ -34,8 +36,10 @@ router.post('/login', async (req, res) => {
     }
 
     req.session.save(() => {
-      req.session.user_id = userData.id;
+      req.session.user_id = userData.id
+      req.session.email = userData.email;
       req.session.logged_in = true;
+    
 
       
       res.render('dashboard', {
