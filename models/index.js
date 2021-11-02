@@ -1,9 +1,9 @@
 const User = require('./User');
-const Posts = require('./Posts');
+const Post = require('./Post');
 const Comment = require('./Comment');
-//user has many posts
+//user has many 
 // Categories have many Products
-User.hasMany(Posts, {
+User.hasMany(Post, {
   foreignKey: 'user_id'
 });
 
@@ -11,32 +11,32 @@ User.hasMany(Comment, {
   foreignKey: 'user_id'
 });
 // Products belongsTo Category
-// posts belongs to user
+//  belongs to user
 
-Posts.belongsTo(User, {
+Post.belongsTo(User, {
   foreignKey: 'user_id'
 });
 
-Posts.hasMany(Comment, {
-  foreignKey: "posts_id"
+Post.hasMany(Comment, {
+  foreignKey: "post_id"
 });
 
 // Products belongToMany Tags (through ProductTag)
-//posts belongs to many conversations    (through conv)
+// belongs to many conversations    (through conv)
 
 
 
 
 
 // Tags belongToMany Products (through ProductTag)
-//comments belongs to many posts  (trough conversations?)
+//comments belongs to many   (trough conversations?)
 Comment.belongsTo(User, {
   foreignKey: 'user_id'
 });
 
-Comment.belongsTo(Posts,{
- foreignKey: "posts_id"
+Comment.belongsTo(Post,{
+ foreignKey: "post_id"
 });
 
 
-module.exports = { User, Posts, Comment };
+module.exports = { User, Post, Comment };
