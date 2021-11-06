@@ -18,10 +18,10 @@ router.get('/login', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    console.log(req.body)
+  
     const userData = await User.findOne({ where: {email: req.body.email } });
 console.log(userData)
-console.log("====9283748923498238942379180237891274908172304897123890471289034712890374890123749012837408912374089123749081273408912734908123789")
+
     if (!userData) {
       res.status(400)
       res.json({message: "Your password or email is not correct."});
@@ -42,10 +42,7 @@ console.log("====928374892349823894237918023789127490817230489712389047128903471
     
 
       
-      res.render('dashboard', {
-        loggedIn: req.session.loggedIn,
-        loggedIn: req.body.loggedIn
-      })
+      res.redirect('/dashboard')
     });
     
     } catch (err){
@@ -129,10 +126,22 @@ router.post('/register', async  (req, res) => {
   }
 });
 
-router.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/users/login');
-});
+router.get('/logout',  (req, res) => {
+  if (req.session.logged_in) {
+    // Remove the session variables
+    req.session.destroy(() => {
+      res.status(204).end();
+      
+    });
+
+    res.redirect('/');
+
+
+    // res.render('/login')
+  } else {
+    res.status(404).end();
+  }
+  });
 
 
 

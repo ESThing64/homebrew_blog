@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 const { Post, User, Comment } = require('../models');
+const withAuth = require('../utils/auth');
 router.get('/', forwardAuthenticated, async (req, res) => {
   try {
     console.log('heyyy')
@@ -15,7 +16,7 @@ router.get('/', forwardAuthenticated, async (req, res) => {
     })
 
     const posts = postData.map(e => e.get({ plain: true }));
-    // console.log(posts)
+    console.log(posts)
 
     res.render('homepage', { posts, loggedIn: req.session.loggedIn })
 
@@ -38,7 +39,7 @@ router.get('/test', async (req, res) => {
   }
 });
 
-router.get('/dashboard', async (req, res) => {
+router.get('/dashboard', withAuth, async (req, res) => {
   try {
     console.log('+++++++++++++++++++heyyy++++++++++++++++++++++++++')
     dashData = await Post.findAll({
