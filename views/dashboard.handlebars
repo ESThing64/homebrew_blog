@@ -1,3 +1,11 @@
+<article class="post">
 <h1 class="mt-4">Dashboard</h1>
+
+
 <p class="lead mb-3">Welcome {{posts.0.user.name}}</p>
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
+    {{#each posts as |post| }}
+        {{> dashboard-data post}}
+    {{/each}}
+
+</article>
+
