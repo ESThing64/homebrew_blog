@@ -3,9 +3,16 @@
 
 
 <p class="lead mb-3">Welcome {{posts.0.user.name}}</p>
+
+<button id="new-post" type="button" class="btn btn-primary d-flex justify-content-center">New Post</button>
+
+
     {{#each posts as |post| }}
         {{> dashboard-data post}}
     {{/each}}
 
 </article>
 
+
+ 
+<script src="/js/script.js">

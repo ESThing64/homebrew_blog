@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
-router.get('/', forwardAuthenticated, async (req, res) => {
+router.get('/',  async (req, res) => {
   try {
 
     postData = await Post.findAll({
@@ -61,15 +61,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
       console.log("=========================================================")
 
     const posts = dashData.map(e => e.get({ plain: true }));
-    console.log('+++++++++++++++++++heyyy++++++++++++++++++++++++++')
-    console.log('+++++++++++++++++++heyyy++++++++++++++++++++++++++')
-    console.log('+++++++++++++++++++heyyy++++++++++++++++++++++++++')
-    console.log('+++++++++++++++++++heyyy++++++++++++++++++++++++++')
-    console.log('+++++++++++++++++++heyyy++++++++++++++++++++++++++')
-    console.log('+++++++++++++++++++heyyy++++++++++++++++++++++++++')
-    console.log('+++++++++++++++++++heyyy++++++++++++++++++++++++++')
-    console.log('+++++++++++++++++++heyyy++++++++++++++++++++++++++')
-    console.log('+++++++++++++++++++heyyy++++++++++++++++++++++++++')
+   
     console.log(posts)
 
     res.render('dashboard', { posts, loggedIn: req.session.loggedIn })
