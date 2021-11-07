@@ -2,13 +2,12 @@ const router = require('express').Router();
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
-router.get('/',  async (req, res) => {
-  try {
 
+router.get('/', async (req, res) => {
+  try {
     postData = await Post.findAll({
       include: [
         {
-
           model: User,
           attributes: ['name']
         }
@@ -16,7 +15,6 @@ router.get('/',  async (req, res) => {
     })
 
     const posts = postData.map(e => e.get({ plain: true }));
-    console.log(posts)
 
     res.render('homepage', { posts, loggedIn: req.session.loggedIn })
 
@@ -41,29 +39,17 @@ router.get('/test', async (req, res) => {
 
 router.get('/dashboard', withAuth, async (req, res) => {
   try {
-   
+
     // console.log(req.session.user_id)
     dashData = await Post.findAll({
-      where: { user_id: req.session.user_id},
-      attributes:['id','post_name','post_body','user_id'],
-      include: [
-        {
+      where: { user_id: req.session.user_id },
+      attributes: ['id', 'post_name', 'post_body', 'user_id'],
+      include: [{ model: User, attributes: ['name'] }]
 
-          model: User,
-          attributes: ['name']
-        }
-      ]
-    
-    
     })
 
-      // console.log(dashData)
-      console.log("=========================================================")
-
     const posts = dashData.map(e => e.get({ plain: true }));
-   
-    console.log(posts)
-
+    
     res.render('dashboard', { posts, loggedIn: req.session.loggedIn })
 
   } catch (err) {
