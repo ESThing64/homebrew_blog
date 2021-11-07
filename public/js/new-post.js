@@ -5,14 +5,21 @@ async function newFormHandler(event) {
     console.log("testign btn")
     event.preventDefault();
   
-    const title = $(':input[name="post-title"]').value;
-    const content = $(':input[name="content"]').value;
+    const post_name = $('#post-title').val();
+    const post_body = $('#content').val();
+    console.log('hey')
+
+    console.log(post_name);
+    console.log(post_body);
+
+
   
-    const response = await fetch(`/api/posts`, {
+    const response = await fetch(`/api/posts/new`, {
       method: 'POST',
       body: JSON.stringify({
-        title,
-        content
+        post_name,
+        post_body,
+      
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -28,6 +35,6 @@ async function newFormHandler(event) {
     }
   };
   
-$('#new-post-form').submit(newFormHandler);
+$('#submit-btn').click(newFormHandler);
 
 })

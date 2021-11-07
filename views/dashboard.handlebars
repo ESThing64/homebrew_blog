@@ -4,7 +4,8 @@
 
 <p class="lead mb-3">Welcome {{posts.0.user.name}}</p>
 
-<button id="new-post" type="button" class="btn btn-primary d-flex justify-content-center">New Post</button>
+<a href="/api/posts"><button id="new-post" type="button" class="btn btn-primary d-flex justify-content-center">New Post</button>
+</a>
 
 
     {{#each posts as |post| }}

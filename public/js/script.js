@@ -7,11 +7,17 @@ console.log('hello world')
 
 // $("#new-post").click(function(){
 //     console.log('heyyyyyyyyyyyy')
-//   });
+//   });sad
 
 // })
-const newPostEl = document.getElementById("new-post");
+// const newPostEl = document.getElementById("new-post");
 
-newPostEl.addEventListener("click", function(){
-    console.log('Heyyyy')
-})
+
+// newPostEl.addEventListener("click", async function(){
+//     console.log('hey')
+//     const response = await fetch('/api/posts/', {
+//         method: 'GET',
+
+//       });
+      
+// })
