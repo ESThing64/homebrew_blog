@@ -21,12 +21,7 @@ router.get('/', withAuth, (req, res) => {
 
 router.post('/new', withAuth, async (req, res) => {
   try {
-
-    console.log("============================================================================================")
-    console.log("============================================================================================")
-    console.log("===============================Hey==================================================")
-    console.log("============================================================================================")
-
+   
     newPostData = await Post.create({
       post_name: req.body.post_name,
       post_body: req.body.post_body,
@@ -44,23 +39,32 @@ router.post('/new', withAuth, async (req, res) => {
 router.get('/:id', withAuth, async (req, res) => {
   try {
 
-    
-    console.log('heyyyyy')
-    console.log('heyyyyy')
-    console.log('heyyyyy')
-    console.log(req.params.id)
-    console.log('heyyyyy')
-    console.log('heyyyyy')
-    console.log('heyyyyy')
     postData = await Post.findOne({
       where: { id: req.params.id },
-      include: User
-      // attributes: ['id', 'post_name', 'post_body', 'user_id']
+      attributes: ['id', 'post_name', 'post_body', 'user_id', 'date_created'],
+      include: [{
+        model: User,
+        attributes: ['name']
+    },
+    {
+        model: Comment,
+        attributes: ['id', 'comment_body', 'date_created'],
+        include: {
+            model: User,
+            attributes: ['name']
+        }
+    }
+]
+
+
+
+
     })
 
     // console.log(postsData)
 
     const post = postData.get({ plain: true });
+
 
     console.log(post)
 
