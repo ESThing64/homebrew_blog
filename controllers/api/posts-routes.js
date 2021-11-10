@@ -56,19 +56,24 @@ router.get('/:id', withAuth, async (req, res) => {
     }
 ]
 
-
-
-
     })
-
-    // console.log(postsData)
 
     const post = postData.get({ plain: true });
 
-
-    console.log(post)
-
     res.render('viewpost', {post, loggedIn: req.session.loggedIn })
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.delete('/:id', withAuth, async (req, res) => {
+  try {
+
+    delpostData = await Post.destroy({
+      where: { id: req.params.id } })
+
+  res.json(delpostData)
 
   } catch (err) {
     res.status(500).json(err);
