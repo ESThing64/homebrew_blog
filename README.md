@@ -1,7 +1,7 @@
 # Tech Blog
 
 ## Deployed application 
-[clickhere](https://quiet-island-53221.herokuapp.com)
+[brewblog.xyz](brewblog.xyz)
 
 
 ## Packages
