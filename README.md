@@ -16,3 +16,16 @@
 ## Known Issues.
 * Unpolished UI
 * Cannot edit nor delete comments or posts  
+
+
+download beat saber
+https://oculusdb.rui2015.me/id/2448060205267927
+
+noodle
+https://github.com/StackDoubleFlow/NoodleExtensions/releases/download/v1.1.0/noodleextensions.qmod
+
+chroma
+https://github.com/bsq-ports/Chroma/releases/download/v2.5.8/chroma.qmod
+
+
+https://computerelite.github.io/tools/Beat_Saber/questmods.html
